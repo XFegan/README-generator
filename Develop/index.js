@@ -116,10 +116,22 @@ const promptUser = () => {
     ]);
   };
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function (err) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("Successfully wrote: " + fileName);
+      });
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    promptUser()
+    .then(function (data) {
+      writeToFile("README.md", generatorMarkdown(data));
+    });
+}
 
 // Function call to initialize app
 init();
